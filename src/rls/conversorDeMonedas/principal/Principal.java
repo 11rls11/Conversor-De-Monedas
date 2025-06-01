@@ -1,12 +1,21 @@
 package rls.conversorDeMonedas.principal;
 
-import rls.conversorDeMonedas.modelos.ConversorDeMonedas;
-
-import java.io.IOException;
+import rls.conversorDeMonedas.modelos.ConversorDeMonedasGUI;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 
 public class Principal {
-    public static void main(String[] args) throws IOException, InterruptedException {
-        ConversorDeMonedas conversor = new ConversorDeMonedas("d596b20b6908a5904a115b07");
-        conversor.ejecutarConversion();
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            try {
+                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            // Crear y mostrar la GUI
+            ConversorDeMonedasGUI gui = new ConversorDeMonedasGUI("d596b20b6908a5904a115b07");
+            gui.setVisible(true);
+        });
     }
 }

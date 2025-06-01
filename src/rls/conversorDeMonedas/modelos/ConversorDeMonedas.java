@@ -9,14 +9,16 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+/*
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+*/
 
 public class ConversorDeMonedas {
     private final String APIKey;
-    private Scanner consola;
-    private final List<Conversion> historial = new ArrayList<>();
+    //private Scanner consola;
+    //private final List<Conversion> historial = new ArrayList<>();
 
     public ConversorDeMonedas(String APIKey) {
         this.APIKey = APIKey;
@@ -25,10 +27,10 @@ public class ConversorDeMonedas {
             System.out.println("API Key inválida");
         } else {
             System.out.println("API Key: " +  APIKey);
-            this.consola = new Scanner(System.in);
+            //this.consola = new Scanner(System.in);
         }
     }
-
+    /*
     private void imprimirMenu() {
         System.out.println("""
                 Conversor de Monedas
@@ -314,7 +316,29 @@ public class ConversorDeMonedas {
 
     private void mostarHistorial() {
         for (int i = 0; i < historial.size(); i++) {
-            System.out.println("rls.convesorDeMonedas.modelos.Conversion " + (i+1) + ": " + historial.get(i));
+            System.out.println("Conversion " + (i+1) + ": " + historial.get(i));
         }
+    }
+    */
+
+    public Conversion obtenerConversion(String codigoMonedaBase, String codigoMonedaDestino, double cantidad)
+            throws IOException, InterruptedException {
+        String direccion = "https://v6.exchangerate-api.com/v6/" +
+                APIKey + "/pair/" + codigoMonedaBase + "/" + codigoMonedaDestino + "/" + cantidad;
+
+        HttpClient cliente = HttpClient.newHttpClient();
+        HttpRequest solicitud = HttpRequest.newBuilder()
+                .uri(URI.create(direccion))
+                .build();
+        HttpResponse<String> respuesta = cliente.send(solicitud, HttpResponse.BodyHandlers.ofString());
+        String json = respuesta.body();
+
+        Gson gson = new GsonBuilder()
+                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+                .setPrettyPrinting()
+                .create();
+
+        ConversionExRateAPI miConversionExRateAPI = gson.fromJson(json, ConversionExRateAPI.class);
+        return new Conversion(miConversionExRateAPI, cantidad);
     }
 }

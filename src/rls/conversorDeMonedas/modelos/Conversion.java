@@ -3,10 +3,10 @@ package rls.conversorDeMonedas.modelos;
 public class Conversion {
     private final String monedaBase;
     private final String monedaDestino;
-    private final int cantidad;
+    private final double cantidad;
     private final double resultado;
 
-    public Conversion(ConversionExRateAPI conversionExRateAPI, int cantidad) {
+    public Conversion(ConversionExRateAPI conversionExRateAPI, double cantidad) {
         this.monedaBase = conversionExRateAPI.base_code();
         this.monedaDestino = conversionExRateAPI.target_code();
         this.cantidad = cantidad;
@@ -15,6 +15,6 @@ public class Conversion {
 
     @Override
     public String toString() {
-        return cantidad + " " + monedaBase + " = " + resultado + " " + monedaDestino;
+        return String.format("%.2f", cantidad) + " " + monedaBase + " = " + String.format("%.2f", resultado) + " " + monedaDestino;
     }
 }

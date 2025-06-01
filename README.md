@@ -23,10 +23,13 @@ la **API** de **ExchangeRate-API**
 ![Historial](img/historial.png)
 
 - **Con el botón de en medio *⇄* puedes intercambiar entre las monedas para hacer las conversiones inversas**
+[Boton Enmedio](https://github.com/user-attachments/assets/ea397be6-8b7c-4307-8972-654c1e4b7698)
 
 - **Al seleccionar cada una de las cintas de opciones de elección de monedas puedes teclear en el teclado el código para elegir más rápidamente las monedas a obtener su conversión de tipo de cambio**
+[Tecleando opciones](https://github.com/user-attachments/assets/96bee344-a126-4fad-b9a2-cf85fc613d53)
 
 - **Las cantidades, *la ingresada para conocer su tipo de cambio y la de resultado*, se redondean a dos decimales para una visualización más limpía de las conversiones de cambio**
+[Redondeo](https://github.com/user-attachments/assets/3a97630b-bb44-4f36-a7bf-03c145a5c99d)
 
 ---
 

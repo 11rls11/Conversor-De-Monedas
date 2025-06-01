@@ -13,6 +13,7 @@ public class ConversorDeMonedasGUI extends JFrame {
     private JLabel labelResultado;
     private JButton btnConvertir;
     private JButton btnHistorial;
+    private JButton btnIntercambiar;
     private final List<Conversion> historial = new ArrayList<>();
 
     // Array con todas las monedas disponibles
@@ -202,6 +203,10 @@ public class ConversorDeMonedasGUI extends JFrame {
         labelResultado = new JLabel("", SwingConstants.CENTER);
         btnConvertir = new JButton("Convertir");
         btnHistorial = new JButton("Ver Historial");
+        btnIntercambiar = new JButton("⇄");
+        btnIntercambiar.setFont(new Font("Arial Unicode MS", Font.BOLD, 18));
+        btnIntercambiar.setPreferredSize(new Dimension(50, 30));
+        btnIntercambiar.setToolTipText("Intercambiar monedas");
 
         // Configurar estilos
         Font titleFont = new Font("Arial", Font.BOLD, 16);
@@ -262,6 +267,12 @@ public class ConversorDeMonedasGUI extends JFrame {
         comboMonedaBase.setPreferredSize(new Dimension(200, 25));
         mainPanel.add(comboMonedaBase, gbc);
 
+        gbc.gridx = 1; gbc.gridy = 3;
+        gbc.anchor = GridBagConstraints.CENTER;
+        btnIntercambiar.setBackground(new Color(255, 165, 0)); // Color naranja
+        btnIntercambiar.setForeground(Color.BLACK);
+        mainPanel.add(btnIntercambiar, gbc);
+
         gbc.gridx = 2; gbc.gridy = 3;
         gbc.anchor = GridBagConstraints.CENTER;
         comboMonedaDestino.setPreferredSize(new Dimension(200, 25));
@@ -304,6 +315,22 @@ public class ConversorDeMonedasGUI extends JFrame {
         btnConvertir.addActionListener(e -> realizarConversion());
 
         btnHistorial.addActionListener(e -> mostrarHistorial());
+
+        btnIntercambiar.addActionListener(e -> intercambiarMonedas());
+    }
+
+    private void intercambiarMonedas() {
+        // Obtener los índices seleccionados actualmente
+        int indiceBase = comboMonedaBase.getSelectedIndex();
+        int indiceDestino = comboMonedaDestino.getSelectedIndex();
+
+        // Intercambiar las selecciones
+        comboMonedaBase.setSelectedIndex(indiceDestino);
+        comboMonedaDestino.setSelectedIndex(indiceBase);
+
+        if (!textCantidad.getText().trim().isEmpty()) {
+            realizarConversion();
+        }
     }
 
     private void realizarConversion() {

@@ -14,7 +14,7 @@ public class Principal {
             }
 
             // Crear y mostrar la GUI
-            ConversorDeMonedasGUI gui = new ConversorDeMonedasGUI("d596b20b6908a5904a115b07");
+            ConversorDeMonedasGUI gui = new ConversorDeMonedasGUI("");
             gui.setVisible(true);
         });
     }
